@@ -26,7 +26,7 @@ Validate Cards display in the Shopping Page
     Select the Card     Blackberry
 
 Select the form and navigate to Child window
-    Fill the login Details and select the User Option
+    Fill the login Details and Login Form
 
 *** Keywords ***
 Fill the login Form
@@ -44,7 +44,7 @@ verify error message is correct
     Should Be Equal As Strings      ${result}       Incorrect username/password.
 
 Verify Card titles in the Shop page
-#   Returns a list containing given items.
+#   Returns a list containing given items. (When Creating list Variable you start with '@')
     @{expectedList} =    Create List     iphone X        Samsung Note 8      Nokia Edge      Blackberry
 #   Returns a list of WebElement objects matching the locator
     ${elements} =        Get WebElements     css:.card-title
@@ -80,6 +80,15 @@ Select the Card
     END
     Run Keyword If    '${index}' != '-1'    Click Button    xpath://body/app-root/app-shop//app-card-list[@class='row']/app-card[${index}]//button[@class='btn btn-info']
 
-Fill the login Details and select the User Option
+Fill the login Details and Login Form
+    Input Text          xpath://input[@id='username']       rahulshettyacademy
+    Input Password      xpath://input[@id='password']       learning
+    Click Element       xpath://*[@id="login-form"]/div[4]/div/label[2]/span[2]
+    Wait Until Element Is Visible       css:.modal-body
+    Click Element       okayBtn
+    Wait Until Element Is Not Visible       css:.modal-body
+    Select From List By Value       css:select.form-control     teach
+    Select Checkbox     xpath://*[@id="terms"]
+    Checkbox Should Be Selected     xpath://*[@id="terms"]
 
 
